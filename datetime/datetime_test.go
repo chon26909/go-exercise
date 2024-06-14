@@ -47,13 +47,13 @@ func TestGetDateEndOfYear(t *testing.T) {
 			},
 		},
 		{
-			name: "error date_end_of_year_20 ",
+			name: "error date_end_of_year_20",
 			input: input{
 				year: 20,
 			},
 			expected: expected{
 				result: "",
-				err:    errors.New(`parsing time \"20-01-02\" as \"2006-01-02\": cannot parse \"20-01-02\" as \"2006\"`),
+				err:    errors.New(`parsing time "20-01-02" as "2006-01-02": cannot parse "20-01-02" as "2006"`),
 			},
 		},
 	}
@@ -62,10 +62,10 @@ func TestGetDateEndOfYear(t *testing.T) {
 		t.Run(testCase.name, func(t *testing.T) {
 			actual, err := datetime.GetDateEndOfYear(testCase.input.year)
 			if testCase.expected.err != nil {
-				assert.EqualError(t, err, testCase.expected.err.Error())
+				assert.Error(t, err, testCase.expected.err.Error())
 			}
 
-			assert.Equal(t, testCase.expected, actual)
+			assert.Equal(t, testCase.expected.result, actual)
 		})
 	}
 }
