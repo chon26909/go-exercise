@@ -59,11 +59,13 @@ func TestGetDateEndOfYear(t *testing.T) {
 	}
 
 	for _, testCase := range testCases {
-		actual, err := datetime.GetDateEndOfYear(testCase.input.year)
-		if testCase.expected.err != nil {
-			assert.EqualError(t, err, testCase.expected.err.Error())
-		}
+		t.Run(testCase.name, func(t *testing.T) {
+			actual, err := datetime.GetDateEndOfYear(testCase.input.year)
+			if testCase.expected.err != nil {
+				assert.EqualError(t, err, testCase.expected.err.Error())
+			}
 
-		assert.Equal(t, testCase.expected, actual)
+			assert.Equal(t, testCase.expected, actual)
+		})
 	}
 }
